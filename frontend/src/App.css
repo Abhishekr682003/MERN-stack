@@ -1,0 +1,110 @@
+.App {
+  width: 100%;
+  background-color: #f5f5f5;
+}
+
+/* Server Status Indicator */
+.server-status {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background-color: white;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  font-weight: 600;
+  font-size: 0.85em;
+  z-index: 1000;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+.server-status.online .status-dot {
+  background-color: #48bb78;
+}
+
+.server-status.offline .status-dot {
+  background-color: #f56565;
+  animation: none;
+}
+
+.server-status.checking .status-dot {
+  background-color: #ed8936;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* Error Banner */
+.error-banner {
+  background-color: #fff5f5;
+  border-bottom: 2px solid #f56565;
+  padding: 20px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.error-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  color: #742a2a;
+}
+
+.error-content strong {
+  display: block;
+  font-size: 1.1em;
+  margin-bottom: 8px;
+}
+
+.error-content p {
+  margin: 0;
+  font-size: 0.95em;
+}
+
+/* Global Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .server-status {
+    top: 10px;
+    right: 10px;
+    font-size: 0.75em;
+  }
+
+  .error-banner {
+    padding: 15px;
+  }
+}

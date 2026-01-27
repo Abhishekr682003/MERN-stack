@@ -1,0 +1,432 @@
+{
+  "info": {
+    "name": "Limited Edition Access API",
+    "description": "MERN Stack Skill Assessment - Complete API Collection",
+    "version": "1.0.0",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:5000/api",
+      "type": "string"
+    },
+    {
+      "key": "customer_id",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Health & Status",
+      "item": [
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/health",
+              "host": ["{{base_url}}"],
+              "path": ["health"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Waitlist - Create",
+      "item": [
+        {
+          "name": "Add Customer to Waitlist",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"alice@example.com\",\n  \"name\": \"Alice Johnson\",\n  \"productId\": \"limited-edition-2024\",\n  \"shopifyCustomerId\": null\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/waitlist",
+              "host": ["{{base_url}}"],
+              "path": ["waitlist"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Waitlist - Read",
+      "item": [
+        {
+          "name": "Get All Waitlist Entries",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/waitlist",
+              "host": ["{{base_url}}"],
+              "path": ["waitlist"]
+            }
+          }
+        },
+        {
+          "name": "Get Waitlist with Pagination",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/waitlist?page=1&limit=10",
+              "host": ["{{base_url}}"],
+              "path": ["waitlist"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Filter by Status",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/waitlist?status=Pending",
+              "host": ["{{base_url}}"],
+              "path": ["waitlist"],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "Pending"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Filter by Product ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/waitlist?productId=limited-edition-2024",
+              "host": ["{{base_url}}"],
+              "path": ["waitlist"],
+              "query": [
+                {
+                  "key": "productId",
+                  "value": "limited-edition-2024"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Combined Filter",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/waitlist?status=Approved&productId=limited-edition-2024",
+              "host": ["{{base_url}}"],
+              "path": ["waitlist"],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "Approved"
+                },
+                {
+                  "key": "productId",
+                  "value": "limited-edition-2024"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Single Entry",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/waitlist/{{customer_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["waitlist", "{{customer_id}}"]
+            },
+            "description": "Get a single waitlist entry by ID. Set {{customer_id}} variable first."
+          }
+        },
+        {
+          "name": "Get Statistics",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/waitlist/stats/summary",
+              "host": ["{{base_url}}"],
+              "path": ["waitlist", "stats", "summary"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Waitlist - Update",
+      "item": [
+        {
+          "name": "Update Status to Approved",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"Approved\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/waitlist/{{customer_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["waitlist", "{{customer_id}}"]
+            },
+            "description": "Update a customer's status to Approved"
+          }
+        },
+        {
+          "name": "Update Status to Pending",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"Pending\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/waitlist/{{customer_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["waitlist", "{{customer_id}}"]
+            }
+          }
+        },
+        {
+          "name": "Update Status to Rejected",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"Rejected\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/waitlist/{{customer_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["waitlist", "{{customer_id}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Waitlist - Delete",
+      "item": [
+        {
+          "name": "Delete Customer",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/waitlist/{{customer_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["waitlist", "{{customer_id}}"]
+            },
+            "description": "Delete a customer from the waitlist"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Webhooks",
+      "item": [
+        {
+          "name": "Webhook Health Check",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{}"
+            },
+            "url": {
+              "raw": "{{base_url}}/webhooks/health",
+              "host": ["{{base_url}}"],
+              "path": ["webhooks", "health"]
+            }
+          }
+        },
+        {
+          "name": "Order Created Webhook",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "X-Shopify-Hmac-SHA256",
+                "value": "your_hmac_here",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"123456\",\n  \"customer\": {\n    \"email\": \"customer@example.com\"\n  },\n  \"total_price\": \"99.99\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/webhooks/shopify/order/created",
+              "host": ["{{base_url}}"],
+              "path": ["webhooks", "shopify", "order", "created"]
+            },
+            "description": "Note: This requires valid HMAC signature for verification"
+          }
+        },
+        {
+          "name": "Customer Created Webhook",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "X-Shopify-Hmac-SHA256",
+                "value": "your_hmac_here",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"gid://shopify/Customer/123\",\n  \"email\": \"newcustomer@example.com\",\n  \"first_name\": \"John\",\n  \"last_name\": \"Doe\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/webhooks/shopify/customer/created",
+              "host": ["{{base_url}}"],
+              "path": ["webhooks", "shopify", "customer", "created"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Validation Tests",
+      "item": [
+        {
+          "name": "Invalid Email (Should Fail)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"invalid-email\",\n  \"name\": \"Test User\",\n  \"productId\": \"limited-edition-2024\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/waitlist",
+              "host": ["{{base_url}}"],
+              "path": ["waitlist"]
+            }
+          }
+        },
+        {
+          "name": "Invalid Product ID (Should Fail)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"test@example.com\",\n  \"name\": \"Test User\",\n  \"productId\": \"invalid@product#id\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/waitlist",
+              "host": ["{{base_url}}"],
+              "path": ["waitlist"]
+            }
+          }
+        },
+        {
+          "name": "Missing Required Field (Should Fail)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"test@example.com\",\n  \"productId\": \"limited-edition-2024\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/waitlist",
+              "host": ["{{base_url}}"],
+              "path": ["waitlist"]
+            },
+            "description": "Missing 'name' field - should return validation error"
+          }
+        }
+      ]
+    }
+  ]
+}
