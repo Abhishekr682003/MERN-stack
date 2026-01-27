@@ -117,8 +117,6 @@ Result: Only authentic, unmodified webhooks are processed ✓
 node --version
 npm --version
 mongod --version
-```
-
 ---
 
 ## 🚀 Installation
